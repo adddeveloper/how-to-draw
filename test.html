@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="style/lib/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- my css -->
+    <link rel="stylesheet" href="style/lib/paper.min.css">
+    <link rel="stylesheet" href="style/css/index.css">
+    <title>Home || DrawFreely</title>
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+        <h1 class="p-0 m-0">Welcome to DrawFreely</h1>
+        <!-- <p class="p-0 m-0">
+            Want any changes or updates made to the site? 
+            <b>Contact Me</b>:
+        </p> -->
+        <!-- info on me -->
+        <div class="container d-flex justify-content-evenly align-items-center">
+            <div class="container d-flex justify-content-evenly align-items-center">
+                <a target="_blank" href="https://www.adnans.ml/contact-me/index.html">
+                    <img src="style/img/envelope-paper.svg">
+                </a>
+                <a target="_blank" href="https://www.instagram.com/adnanscode/">
+                    <img src="style/img/instagram.svg">
+                </a>
+                <a target="_blank" href="https://github.com/adddeveloper">
+                    <img src="style/img/github.svg">
+                </a>
+                <a target="_blank" href="https://www.youtube.com/channel/UCZ0GqtCuXYJ99XVY1aiyHOg">
+                    <img src="style/img/youtube.svg">
+                </a>
+                <a target="_blank" href="https://twitter.com/adnanscode">
+                    <img src="style/img/twitter.svg">
+                </a>
+            </div>
+        </div>
+        <!-- drawing canvas -->
+        <div class="container-fluid my-5 d-flex flex-column justify-content-center align-items-center">
+            <div class="my-3 container d-flex justify-content-center align-items-center flex-row flex-wrap">
+                <div class="container flex-wrap flex-column justify-content-evenly align-items-start d-flex">
+                    <canvas id="canvas"></canvas>
+                    <div class="d-flex">
+                        <input accept="image/*" type="file" class="inputs">
+                        <button id="downloadImage" class="buttons"><img src="style/img/download.svg"> download</button>
+                        <button id="clear" class="buttons"><img src="style/img/paint-bucket.svg"></button>
+                        <input type="color" class="inputs" id="clearColor">
+                    </div>
+                </div>
+                <div class="flex-wrap flex-row container d-flex">
+                    <div class="d-flex">
+                        <div class="d-flex">
+                            <label for="pencilTip">size:</label>
+                            <input id="pencilTip" value="3" type="range" max="100" min="1">
+                        </div>
+                    </div>
+                    <input type="color" class="inputs" id="penColor">
+                    <div class="container d-flex  align-items-center flex-row flex-wrap justify-content-evenly">
+                        <div class="d-flex">
+                            <label for="red">red:</label>
+                            <input id="red" value="0" type="range" max="255" min="0">
+                        </div>
+                        <div class="d-flex">
+                            <label for="green">green:</label>
+                            <input id="green" value="0" type="range" max="255" min="0">
+                        </div>
+                        <div class="d-flex">
+                            <label for="blue">blue:</label>
+                            <input id="blue" value="0" type="range" max="255" min="0">
+                        </div>
+                    </div>
+                    <label for="one" class="input-radio bg-success">1. Line Brush</label>
+                    <input name="brush" type="radio" id="one" class="d-none">
+                    <label for="two" class="input-radio bg-success">2. Smooth</label>
+                    <input name="brush" type="radio" id="two" class="d-none"> 
+                    <label for="three" class="input-radio">3. Full Spray Paint</label>
+                    <input name="brush" type="radio" id="three" class="d-none">
+                    <label for="four" class="input-radio">4. Quill</label>
+                    <input name="brush" type="radio" id="four" class="d-none">
+                    <label for="five" class="input-radio bg-success">5. Random</label>
+                    <input name="brush" type="radio" id="five" class="d-none">
+                    <label for="six" class="input-radio bg-success">6. Soft Step</label>
+                    <input name="brush" type="radio" id="six" class="d-none">
+                    <label for="seven" class="text-dark bg-danger input-radio">7. Empty Spray Paint</label>
+                    <input name="brush" type="radio" id="seven" class="d-none">
+                    <label for="eight" class="text-dark bg-danger input-radio">8. Soft Spray Paint</label>
+                    <input name="brush" type="radio" id="eight" class="d-none">
+                    <label for="nine" class="input-radio">9. Hard Step</label>
+                    <input name="brush" type="radio" id="nine" class="d-none">
+                    <label for="ten" class="input-radio  bg-success">10. Spider Web</label>
+                    <input name="brush" type="radio" id="ten" class="d-none">
+                    <label for="eleven" class="input-radio">11. Multiple Pens</label>
+                    <input name="brush" type="radio" id="eleven" class="d-none">
+                </div>
+                <div class="py-2 fixed-bottom bg-dark text-secondary d-flex">
+                    <div class="container d-flex">
+                        <div class="d-flex mx-1">
+                            <img src="style/img/image-fill.svg">
+                            <div class="mx-1 border-1 border- border-light">
+                                <span class="text-white" id="width__">--</span>
+                                x 
+                                <span class="text-white" id="height__">--px</span>
+                            </div>
+                        </div>
+                        <div style="border: 1px solid white;"></div>
+                        <div class="d-flex mx-1">
+                            <img src="style/img/cursor-fill.svg">
+                            <div class="mx-1 border-1 border- border-light">
+                                <span class="text-white" id="cursorx__">--</span>
+                                ,
+                                <span class="text-white" id="cursory__">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-bottom: 300px;"></div>
+    <script src="S/file.js"></script>
+    <script src="S/canvas.js"></script>
+</body>
+</html>

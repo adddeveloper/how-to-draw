@@ -246,8 +246,15 @@ function draw__(){
     canvas.classList.add("m-2");
     img___.onload = ()=>{
         redraw()
-        canvas.width = parseInt(img___.width)+20;
-        canvas.height = parseInt(img___.height)+20;
+        if(canvasarray[0]==0 && canvasarray[1]==0){
+            canvas.width = parseInt(img___.width)+20;
+            canvas.height = parseInt(img___.height)+20;
+            canvasarray[0] = parseInt(img___.width)+20;
+            canvasarray[1] =parseInt(img___.height)+20;
+        } else {
+            canvas.width = canvasarray[0];
+            canvas.height = canvasarray[1];
+        }
     }
     cbbbdiv.append(icdiv, erasecontainer, canvas, bbbdiv);
 

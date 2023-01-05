@@ -1,5 +1,6 @@
 var image__ = document.createElement("img");
 var __image = document.createElement("img");
+var canvasarray =[0,0];
 
 function redraw() {
     __image.src = canvas.toDataURL(); 
@@ -123,14 +124,20 @@ function drawupdate(){
     canvas.addEventListener("touchstart", (e) => {
         if(pencil){
             console.log(e.touches[0].clientX,e.touches[0].clientY, e.touches[0])
-            x = e.touches[0].clientX-canvas.offsetLeft;
-            y = e.touches[0].clientY;
+            var rect = canvas.getBoundingClientRect();
+            x = (e.touches[0].clientX-rect.left)*(canvas.width/rect.width);
+            y = (e.touches[0].clientY-rect.top)*(canvas.height/rect.height);
+            // x = e.touches[0].clientX-canvas.offsetLeft;
+            // y = e.touches[0].clientY;
             context.globalCompositeOperation="source-over";
             brushStyle();
         }
         if(eraser){
-            x = e.touches[0].clientX-canvas.offsetLeft;
-            y = e.touches[0].clientY;
+            // x = e.touches[0].clientX-canvas.offsetLeft;
+            // y = e.touches[0].clientY;
+            var rect = canvas.getBoundingClientRect();
+            x = (e.touches[0].clientX-rect.left)*(canvas.width/rect.width);
+            y = (e.touches[0].clientY-rect.top)*(canvas.height/rect.height);
             context.globalCompositeOperation="destination-out";
             context.lineWidth = earsersize.value;
         }
@@ -143,16 +150,22 @@ function drawupdate(){
         if (isDrawingOnCanvas && pencil) {
             context.beginPath();
             context.moveTo(x, y);
-            x = e.touches[0].clientX-canvas.offsetLeft;
-            y = e.touches[0].clientY;
+            // x = e.touches[0].clientX-canvas.offsetLeft;
+            // y = e.touches[0].clientY;
+            var rect = canvas.getBoundingClientRect();
+            x = (e.touches[0].clientX-rect.left)*(canvas.width/rect.width);
+            y = (e.touches[0].clientY-rect.top)*(canvas.height/rect.height);
             context.lineTo(x, y);
             context.stroke();
         } 
         if (isDrawingOnCanvas && eraser){
             context.beginPath();
             context.moveTo(x,y);
-            x = e.touches[0].clientX-canvas.offsetLeft;
-            y = e.touches[0].clientY;
+            // x = e.touches[0].clientX-canvas.offsetLeft;
+            // y = e.touches[0].clientY;
+            var rect = canvas.getBoundingClientRect();
+            x = (e.touches[0].clientX-rect.left)*(canvas.width/rect.width);
+            y = (e.touches[0].clientY-rect.top)*(canvas.height/rect.height);
             context.lineTo(x,y);
             context.stroke(); 
         }

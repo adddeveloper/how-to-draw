@@ -119,6 +119,45 @@ function drawupdate(){
     document.addEventListener("mouseup", () => {
         isDrawingOnCanvas = false;
     });
+
+    canvas.addEventListener("touchstart", (e) => {
+        if(pencil){
+            console.log(e.touches[0].clientX,e.touches[0].clientY, e.touches[0])
+            x = e.touches[0].clientX-canvas.offsetLeft;
+            y = e.touches[0].clientY;
+            context.globalCompositeOperation="source-over";
+            brushStyle();
+        }
+        if(eraser){
+            x = e.touches[0].clientX-canvas.offsetLeft;
+            y = e.touches[0].clientY;
+            context.globalCompositeOperation="destination-out";
+            context.lineWidth = earsersize.value;
+        }
+        isDrawingOnCanvas = true;
+    });
+    canvas.addEventListener("touchend", () => {
+        isDrawingOnCanvas = false;
+    });
+    canvas.addEventListener("touchmove", (e) => {
+        if (isDrawingOnCanvas && pencil) {
+            context.beginPath();
+            context.moveTo(x, y);
+            x = e.touches[0].clientX-canvas.offsetLeft;
+            y = e.touches[0].clientY;
+            context.lineTo(x, y);
+            context.stroke();
+        } 
+        if (isDrawingOnCanvas && eraser){
+            context.beginPath();
+            context.moveTo(x,y);
+            x = e.touches[0].clientX-canvas.offsetLeft;
+            y = e.touches[0].clientY;
+            context.lineTo(x,y);
+            context.stroke(); 
+        }
+    });
+
 }
 
 // screen is too small?

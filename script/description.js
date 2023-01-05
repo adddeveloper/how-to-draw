@@ -300,7 +300,7 @@ function draw__(){
                     if(xn<=ddata[0].order.length-1){
                         i_m_g.src =  'https://' + ddata[0].src + '/' + ddata[0].order[xn];
                     } else if(xn > ddata[0].order.length-1){
-                        alert("you are finished!")
+                        alert("you are finished!");
                         xn--;
                     }
                 }

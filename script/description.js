@@ -9,8 +9,9 @@ function isInt(value) {
 function more__(){
     var anchor = document.createElement("a");
     anchor.href = window.location.href.split("#")[0]+ "#s#" + window.location.href.split("#")[1];
-    anchor.target = "_blank";
+    // anchor.target = "_blank";
     anchor.click();
+    location.reload();
 }
 function start__(){
     var board__ = document.getElementById("board__");
@@ -53,9 +54,11 @@ function draw__(){
         if(window.getComputedStyle(canvas).getPropertyValue('background-image') == 'none'){
             canvas.style.backgroundImage = "url("+img___.src+")";
             tracebutton.innerHTML = "Cancel Tracing?";
+            tracebutton.classList.add("bg-danger");
         } else{
             canvas.style.backgroundImage = "none";
             tracebutton.innerHTML = "Trace the image?";
+            tracebutton.classList.remove("bg-danger");
         }
     });
 
@@ -69,8 +72,9 @@ function draw__(){
     cbbbdiv.classList.add("d-flex", "flex-wrap", "justify-content-center", "align-items-center");
     // body of pencil style
     var icdiv = document.createElement("div");
-    icdiv.style = "left: auto; width: 18rem; height: 9rem; bottom: 10px; right: 10px;";
-    icdiv.classList.add('d-none', 'shadow-lg', 'align-items-center', 'bg-white', 'border', 'border-dark', 'd-flex', 'flex-column', 'fixed-bottom', 'justify-content-evenly');
+    icdiv.style ="width: 18rem; height: 9rem;margin:0 4rem;";
+    icdiv.classList.add('d-none', 'shadow-lg', 'align-items-center', 'bg-white', 'border', 'border-dark', 'd-flex', 'flex-column', 'justify-content-evenly');
+    icdiv.id ="icdiv";
     // exit
     var pendivholder = document.createElement("div");
     pendivholder.classList.add('d-flex', 'justify-content-between', 'container-fluid');
@@ -111,8 +115,9 @@ function draw__(){
     icdiv.append(pendivholder, nptdiv, npt__div);
 
     var erasecontainer = document.createElement("div");
-    erasecontainer.style = "left: auto; width: 18rem; height: 9rem; bottom: 10px; right: 10px;";
-    erasecontainer.classList.add('d-none', 'shadow-lg', 'align-items-center', 'bg-white', 'border', 'border-dark', 'd-flex', 'flex-column', 'fixed-bottom', 'justify-content-evenly');
+    erasecontainer.style ="width: 18rem; height: 9rem;margin:0 4rem;";
+    erasecontainer.classList.add('d-none', 'shadow-lg', 'align-items-center', 'bg-white', 'border', 'border-dark', 'd-flex', 'flex-column', 'justify-content-evenly');
+    erasecontainer.id ="erasecontainer";
     // exit
     var eraseholder = document.createElement("div");
     eraseholder.classList.add('d-flex', 'justify-content-between', 'container-fluid');
@@ -212,6 +217,9 @@ function draw__(){
             var labbel = document.createElement("button");
             labbel.onclick = ()=>{
                 icdiv.classList.remove("d-none");
+                if(!(erasecontainer.classList.contains("d-none"))){
+                    erasecontainer.classList.add("d-none");
+                }
                 eraser = false;
                 pencil = true;
             }
@@ -230,6 +238,9 @@ function draw__(){
                     eraser = true;
                     pencil = false;
                     erasecontainer.classList.remove("d-none");
+                    if(!(icdiv.classList.contains("d-none"))){
+                        icdiv.classList.add("d-none");
+                    }
                 })
             } else{
                 bbb.id ="help";
@@ -256,7 +267,11 @@ function draw__(){
             canvas.height = canvasarray[1];
         }
     }
-    cbbbdiv.append(icdiv, erasecontainer, canvas, bbbdiv);
+    var holderoficdiverase = document.createElement("div");
+    holderoficdiverase.style = "left: auto; bottom: 10px; right: 10px;";
+    holderoficdiverase.classList.add("fixed-bottom", "d-flex");
+    holderoficdiverase.append(icdiv, erasecontainer);
+    cbbbdiv.append(holderoficdiverase, canvas, bbbdiv);
 
     var bb_div = document.createElement("div");
     bb_div.classList.add("d-flex", "justify-content-evenly", "align-items-center");
@@ -321,7 +336,7 @@ function draw__(){
     board__.append(div___, secdiv___);
     drawupdate();
 }
-
+// 
 fetch("https://raw.githubusercontent.com/adddeveloper/drawing-resource/main/index.json")
 .then((res) => res.json())
 .then((data) => {
@@ -345,6 +360,8 @@ fetch("https://raw.githubusercontent.com/adddeveloper/drawing-resource/main/inde
                 anchor.href="/";
                 anchor.click();
             }
+            var bboard__ = document.getElementById("board__");
+            bboard__.style.padding = "0 0 8rem 0";
         } else {
             var anchor = document.createElement("a");
             anchor.href="/";

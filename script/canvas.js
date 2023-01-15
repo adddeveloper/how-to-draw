@@ -176,6 +176,7 @@ function drawupdate(){
 // screen is too small?
 
 function resizePLZ(){
+    if(window.location.href.split("#")[1] != 's') return;
     var s_div = document.getElementById("s_div");
     var h_div = document.getElementById("h_div");
     if(window.innerWidth <=650){

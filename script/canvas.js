@@ -122,6 +122,7 @@ function drawupdate(){
     });
 
     canvas.addEventListener("touchstart", (e) => {
+        e.preventDefault()
         if(pencil){
             console.log(e.touches[0].clientX,e.touches[0].clientY, e.touches[0])
             var rect = canvas.getBoundingClientRect();
